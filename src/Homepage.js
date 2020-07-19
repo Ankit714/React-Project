@@ -51,6 +51,7 @@ const Homepage = () => {
             onChange={(e) => setLocation(e.target.value)}
           />
         </label>
+        with class
         <AnimalDropdown />
         <BreedDropdown />
         <label htmlFor="theme">

@@ -12,18 +12,21 @@ class Details extends Component {
   componentDidMount() {
     //throw new Error("rofl");
 
-    pet.animal(this.props.id).then(({ animal }) => {
-      this.setState({
-        url: animal.url,
-        name: animal.name,
-        animal: animal.type,
-        location: `${animal.contact.address.city} , ${animal.contact.address.state}`,
-        description: animal.description,
-        media: animal.photos,
-        breed: animal.breeds.primary,
-        loading: false,
-      });
-    });
+    pet
+      .animal(this.props.id)
+      .then(({ animal }) => {
+        this.setState({
+          url: animal.url,
+          name: animal.name,
+          animal: animal.type,
+          location: `${animal.contact.address.city} , ${animal.contact.address.state}`,
+          description: animal.description,
+          media: animal.photos,
+          breed: animal.breeds.primary,
+          loading: false,
+        });
+      })
+      .catch((err) => this.setState({ error: err }));
   }
 
   toggleModal = () => this.setState({ showModal: !this.state.showModal });
@@ -85,7 +88,7 @@ class Details extends Component {
   }
 }
 
-export default function DetailsWithErrorBoundary(props) {
+export default function DetailsErrorBoundary(props) {
   return (
     <ErrorBoundary>
       <Details {...props} />
